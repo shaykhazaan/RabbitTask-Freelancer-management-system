@@ -1,0 +1,124 @@
+create database RabbitTask
+
+create table Admin
+(
+id bigint AUTO_INCREMENT PRIMARY key,
+    name varchar(40) NOT null,
+    email varchar(50) unique NOT null,
+    pass varchar(20) NOT null,
+    doj datetime DEFAULT CURRENT_TIMESTAMP
+
+)
+
+insert into admin(name,email,pass) VALUES
+('Abrar','abrarhussain12911@gmail.com','12911')
+create table freelancer
+(
+fid bigint AUTO_INCREMENT PRIMARY key,
+femail varchar(50) unique NOT null,
+fpass varchar(100) NOT null,
+doj datetime DEFAULT CURRENT_TIMESTAMP
+status varchar(10) NOT null DEFAULT 'pending'
+
+
+
+)
+create table client
+(
+cid bigint AUTO_INCREMENT PRIMARY key,
+cemail varchar(50) unique NOT null,
+cpass varchar(100) NOT null,
+cname varchar(30) NOT null default 'N/A',
+    parentage varchar(30) NOT null default 'N/A',
+    address varchar(40) NOT null default 'N/A',
+    phno varchar(13) NOT null default 'N/A',
+    company Name varchar(40) NOT null default 'N/A',
+    company_size int default 1,
+    country varchar(30) not null default 'N/A',
+ clientid bigint,
+FOREIGN KEY(clientid) REFERENCES clients(cid),
+status varchar(10) NOT null DEFAULT 'pending',
+doj datetime DEFAULT CURRENT_TIMESTAMP
+
+)
+create table project
+(
+pid bigint AUTO_INCREMENT PRIMARY key,
+project_name varchar(50),
+project_category varchar(50),
+client_id bigint,
+FOREIGN KEY(client_id) REFERENCES clients(cid),
+duration int,
+budget varchar(20),
+details varchar(500),
+project_subcategory varchar(50),
+is_active int,
+status varchar(10),
+dop datetime DEFAULT CURRENT_TIMESTAMP
+)
+create table category
+(
+cat_id bigint AUTO_INCREMENT PRIMARY KEY,
+    cat_name varchar(50),
+    doa datetime DEFAULT CURRENT_TIMESTAMP
+)
+create table sub_category
+(
+sub_cat_id bigint AUTO_INCREMENT PRIMARY KEY,
+    sub_cat_name varchar(100),
+    p_cat_id bigint,
+    FOREIGN KEY (p_cat_id) REFERENCES category(cat_id) on DELETE CASCADE,
+    doa_sub datetime default CURRENT_TIMESTAMP
+
+
+
+)
+create table contract
+(
+contract_id bigint AUTO_INCREMENT PRIMARY KEY,
+job_id bigint,
+FOREIGN KEY (job_id) REFERENCES project(pid) on DELETE CASCADE,
+client_id bigint,
+FOREIGN KEY (client_id) REFERENCES clients(cid),
+freelancer_id bigint,
+FOREIGN KEY (freelancer_id) REFERENCES freelancers(fid),
+budget varchar(20),
+contract_status varchar(20) default 'pending', 
+doc datetime default CURRENT_TIMESTAMP
+
+)
+create table bid
+(
+bid_id bigint AUTO_INCREMENT PRIMARY KEY,
+job_id bigint,
+FOREIGN KEY (job_id) REFERENCES project(pid) on DELETE CASCADE,
+client_id bigint,
+FOREIGN KEY (client_id) REFERENCES clients(cid),
+freelancer_id bigint,
+FOREIGN KEY (freelancer_id) REFERENCES freelancers(fid),
+budget varchar(20),
+job_approval varchar(20) default 'pending',
+intro_of_frln varchar(500),
+doc datetime default CURRENT_TIMESTAMP
+
+)
+create table working_project
+{
+wp_id bigint autoincrement default,
+prjt_id bigint,
+foreign key(prjt_id) refrences project(pid),
+client_id bigint,
+freelancer_id bigint,
+working_status varchar(10) default '0%',
+payment_type varchar(30) default 'instalments'
+payment_status varchar(20) default '0%',
+total_payment varchar(10),
+balance varchar(10),
+payment_given varchar(10),
+project_start _date datetime default currenttimestamp,
+deadline datetime,
+prjt_slides varchar(600),
+
+}
+Dear Sir / Madam
+My name is tariq and i am game developer from srinagar who is specialized in java and android .I am applying for your published project offer for remote working .I have 6 years of experience both on site and with remote project .I have designed and developed 20 games .Based on the provided project detail i will surely complete the project within the estimated time.

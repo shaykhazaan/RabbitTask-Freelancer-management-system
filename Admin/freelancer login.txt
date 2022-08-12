@@ -1,0 +1,291 @@
+freelancer Login 
+
+
+<?php
+require_once('admin/small_header.php');
+?>
+<script type="text/javascript">
+	
+function captcha()
+{
+	document.getElementById("ctext").value="";
+
+	document.getElementById("msg").style.visibility="hidden";
+arr=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0']
+a=arr[Math.floor(Math.random()*arr.length)];
+b=arr[Math.floor(Math.random()*arr.length)];
+c=arr[Math.floor(Math.random()*arr.length)];
+d=arr[Math.floor(Math.random()*arr.length)];
+e=arr[Math.floor(Math.random()*arr.length)];
+f=arr[Math.floor(Math.random()*arr.length)];
+
+document.getElementById("clabel").innerText=a+b+c+d+e+f;
+
+}
+
+function validcaptcha()
+{
+
+	string1=document.getElementById("clabel").innerText;
+string2=document.getElementById("ctext").value;
+if(string1==string2)
+{
+	return true;	
+}
+
+else
+{
+	document.getElementById("msg").style.visibility="visible";
+	return false;
+}
+
+}
+
+
+</script>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="links/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="links/fontawesome/css/all.css">
+
+</head>
+<body onload="captcha()">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div id="login_section">
+					<h1 style="font-family: 'Audiowide', cursive;text-align: center;"><span style="color:#6fda44;">Log</span><span style="color:white">In</span></h1>
+
+					<form method="post" onsubmit="return validcaptcha()">
+
+						<div id="input_email"><input type="text" name="email" placeholder="Email" class="form-control inputs"  /></div><br>
+						<div id="input_pass"><input type="password" name="pass" placeholder="Password" class="form-control inputs"></div><br>
+<div id="wraper_capcha" class="form-control"><label id="clabel"></label><input id="ctext" type="text" name="" required> <button type="button" onclick="captcha()" id="refresh"><i class="fa fa-sync-alt"></i></button></div>
+						<div id="msg">Invalid Capcha</div>
+
+						<div id="button_login"><input type="submit" name="btn" value="LogIn" class="form-control btn inputs"></div><br>
+						<div id="button_signup"><a href="signup.php" class="form-control btn btn-info inputs" style="text-decoration: none;">SignUp</a><dvi>
+						
+
+					</form>
+
+						
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+		</div>
+	</div>
+</body>
+</html>
+
+
+</body>
+</html>
+<style type="text/css">
+body
+{
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-image: url("images/freelancer_login.jpg");
+	
+}
+	#login_section
+	{
+		
+		margin-top: 200px;
+		
+		padding:50px;
+		background-color:rgba(20,43,53,0.5);
+		text-shadow: 1px 1px 1px black;
+		box-shadow: 2px 2px 2px black;
+		
+	}
+	#login_heading
+	{
+	font-family: 'Audiowide', cursive;
+	text-align: center;
+	font-weight: bolder;
+	}	
+
+	.inputs
+	{
+		/*width: 100%;*/
+		/*height:50px;*/
+		font-size: 20px;
+		text-indent: 30px;
+		font-weight:bold;
+		
+
+		box-shadow: 2px 2px 2px  black;
+
+	}
+	#input_email
+	{
+		position: relative;
+	}
+	#input_email::after
+	{
+		content: "\f007";
+		font-family: "Font Awesome 5 Free";
+		font-weight:900;
+
+		font-size: 30px;
+		color:black;
+		position: absolute;
+		top:5px;
+		right:30px;
+		color:#204353;
+	}
+	#button_login
+	{
+		position: relative;
+		font-size:25px;
+		font-weight:bold;
+		text-shadow: 1px 1px 1px black;
+		color:#204353;
+		background-color:#6fda44;
+	}
+	#button_login::after
+	{
+		content: "\f2f6";
+		font-family: "Font Awesome 5 Free";
+		font-weight:900;
+		font-size: 30px;
+		color:black;
+		position: absolute;
+		top:2px;
+		right:30%;
+		color:#204353;
+	}
+	#button_signup
+	{
+		position: relative;
+		font-size:25px;
+		font-weight:bold;
+		text-shadow: 1px 1px 1px black;
+		color:#204353;
+	
+	}
+	#button_signup::after
+	{
+		content: "\f304";
+		font-family: "Font Awesome 5 Free";
+		font-weight:900;
+		font-size: 30px;
+		color:black;
+		position: absolute;
+		top:2px;
+		right:30%;
+		color:#204353;
+	}
+
+	#input_pass
+	{
+		position: relative;
+	}
+	#input_pass::after
+	{
+		content: "\f023";
+		font-family: "Font Awesome 5 Free";
+		font-weight:900;
+		font-size: 30px;
+		color:black;
+		position: absolute;
+		top:5px;
+		right:30px;
+		color:#204353;
+	}
+		#wraper_capcha
+{
+	background-color: transparent;
+	border:none;
+}
+
+	#clabel{
+		font-size: 15px;
+		padding: 5px;
+		text-align: center;
+		color:white;
+		letter-spacing: 2px;
+		font-weight: bold;
+
+	}
+	#ctext
+	{
+		width: 25%;
+		margin-right: 5px;
+		font-size: 15px;
+		font-weight: bold;
+
+	}
+
+	#msg
+	{
+		color:red;
+		margin-left: 30px;
+		visibility: hidden;
+	}
+
+</style>
+<?php
+
+if(isset($_POST['btn']))
+{
+	
+	
+		$t=0;
+	require_once('admin/connectivity.php');
+	$result=mysqli_query($con,"select * from freelancers");
+	while($r=mysqli_fetch_assoc($result))
+	{
+		if($_POST['email']==$r['femail'] && password_verify($_POST['pass'],$r['fpass']))
+
+		{
+		
+
+				if(isset($_SESSION['validfreelancer']))
+				{
+					echo"<script>alert('Already Logged In');</script>";
+					$t=2;
+					break;
+
+				}
+
+		else
+		{
+			$_SESSION['validfreelancer']=$r['femail'];
+			$_SESSION['freelancerid']=$r['fid'];
+			$_SESSION['fstatus']=$r['status'];
+			$_SESSION['freelancerpic']=$r['pic'];
+			$_SESSION['freelancercategory']=$r['sub_category'];
+			$t=1;
+		}
+
+		}
+	}
+
+	if($t==1)
+	{
+header('location:dashboard.php');
+		
+		
+	}
+	elseif($t==0)
+	{
+		
+
+		
+		echo"<script>alert('Invalid Email / Password');</script>";
+
+
+	}
+
+
+}
+ ?>

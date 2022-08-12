@@ -1,0 +1,251 @@
+
+Admin Dashboard
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>	</title>
+	<link rel="stylesheet" type="text/css" href="../links/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../links/fontawesome/css/all.css">
+
+</head>
+<body>
+	<?php
+	require_once('header.php');
+	require_once('menu.php');
+	require_once('connectivity.php');
+	?>
+	<div id="dashboard_section">
+		<h1 style="color:grey;font-size: 40px;text-align: center;margin-top: 20px">Dashboard</h1>
+		
+		
+			<div class="container" style="margin-top: 40px;">
+				<div class="row">
+					<div class="col-md-1"></div>
+					<div class="col-md-4 block"> 
+						<span id="clients" class="count"><h3></h3></span>
+						<h1><a href="clients.php">Clients</a></h1>
+				</div>
+					
+					<div class="col-md-1"></div>
+					<div class="col-md-4 block">
+						<span id="freelancers" class="count"></span>
+					 <h1><a href="freelancers.php">Freelancers</a></h1>
+				</div>
+
+				
+				<div class="col-md-2"></div>
+			</div>
+					<div class="row" style="margin-top: 30px;">
+					<div class="col-md-1"></div>
+					<div class="col-md-4 block">
+					<span id="approvedjobs" class="count"></span> 
+						<h1><a href="approved_jobs.php">Approved Jobs</a></h1>
+				</div>
+					
+					<div class="col-md-1"></div>
+					<div class="col-md-4 block"> 
+					<span id="newjobs" class="count"></span>
+						<h1><a href="new_job_posts.php">New Jobs</a></h1>
+
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+					<div class="row" style="margin-top: 30px;">
+					<div class="col-md-1"></div>
+					<div class="col-md-4 block"> 
+<span id="blkfreelancer" class="count"></span>
+						<h1><a href="progress.php">Blocked Freelancers</a></h1>
+				</div>
+					
+					<div class="col-md-1"></div>
+					<div class="col-md-4 block"> 
+						<h1><a href="progress.php">Active Projects</a></h1>
+
+				</div>
+				<div class="col-md-2"></div>
+				<div class="row" style="margin-top: 30px;">
+					<div class="col-md-1"></div>
+					<div class="col-md-4 block"> 
+<span id="newfreelancers" class="count"></span>
+						<h1><a href="new_freelancers.php">New Freelancers</a></h1>
+				</div>
+					
+					<div class="col-md-1"></div>
+					<div class="col-md-4 block"> 
+						<span id="newclients" class="count"></span>
+						<h1><a href="new_clients.php">New Clients</a></h1>
+
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+	</div>
+</div>
+
+	<?php
+$result=mysqli_query($con,"select * from freelancers where status='approved'");
+$freelancers=mysqli_num_rows($result);
+$result=mysqli_query($con,"select * from clients where status='approved'");
+$clients=mysqli_num_rows($result);
+$result=mysqli_query($con,"select * from job_post where pstatus='approved'");
+$jobs=mysqli_num_rows($result);
+$result=mysqli_query($con,"select * from job_post where pstatus='pending'");
+$newjobs=mysqli_num_rows($result);
+$result=mysqli_query($con,"select * from clients where status='approved'");
+$clients=mysqli_num_rows($result);
+$result=mysqli_query($con,"select * from freelancers where status='pending'");
+$newfreelancers=mysqli_num_rows($result);
+$result=mysqli_query($con,"select * from clients where status='pending'");
+$newclients=mysqli_num_rows($result);
+
+
+	echo"<div class='placeholders' id='c'>".$clients."</div>";
+	echo"<div class='placeholders' id='f'>".$freelancers."</div>";
+ 
+ 	echo"<div class='placeholders' id='j'>".$jobs."</div>";
+ 	echo"<div class='placeholders' id='nj'>".$newjobs."</div>";
+ 	echo"<div class='placeholders' id='nf'>".$newfreelancers."</div>";
+ 	echo"<div class='placeholders' id='nc'>".$newclients."</div>";
+
+
+
+?>
+</body>
+</html>
+<style type="text/css">
+body
+{
+background-image: url(../images/dashboard.jpg);
+		background-size: 100%;
+		
+}
+	#dashboard_section
+	{
+		margin-left: 200px;
+		margin-top: 100px;
+		
+		box-sizing: border-box;
+		padding: 5px;
+		
+		height: 100%;
+		background-repeat: no-repeat;
+	}
+	.block:hover
+	{
+		background-color:rgba(20,43,53,0.9);
+		
+		cursor: pointer;
+
+	}
+	.block
+	{
+
+		height: 150px;
+		padding-top: 50px;
+		background-color:rgba(20,43,53,0.6);
+		text-align: center;
+		vertical-align: top;
+		color:white;
+		
+		
+	}
+	.block>h1>a
+	{
+		color: white;
+		text-decoration: none;
+	}
+	i
+	{
+		color: #6fda44;
+	}
+	.count
+	{
+		font-size: 20px;
+	}
+	
+</style>
+</style>
+<script type="text/javascript">
+	min1=0;
+	min2=0;
+	min3=0;
+	min4=0;
+	min5=0;
+	min6=0;
+	max1=document.getElementById('c').innerText;
+	max2=document.getElementById('f').innerText;
+	max3=document.getElementById('j').innerText;
+	max4=document.getElementById('nj').innerText;
+	max4=document.getElementById('nf').innerText;
+	max4=document.getElementById('nc').innerText;
+
+
+    setInterval(funClients,200);
+	setInterval(funFreelancers,210);
+	
+	setInterval(funJobs,250);		
+	setInterval(funNewJobs,300);
+	setInterval(funNewFreelancers,300);
+	setInterval(funNewClients,300);
+
+
+	
+
+	function funClients()
+	{
+		if(min1<=max1)
+		{
+			document.getElementById('clients').innerText=min1 + '+';
+			min1++;
+		}
+	}
+		function funFreelancers()
+	{
+		if(min2<=max2)
+		{
+			document.getElementById('freelancers').innerText=min2 + '+';
+			min2++;
+		}
+	}
+			function funJobs()
+	{
+		if(min3<=max3)
+		{
+			document.getElementById('approvedjobs').innerText=min3 + '+';
+			min3++;
+		}
+	}
+			function funNewJobs()
+	{
+		if(min4<=max4)
+		{
+			document.getElementById('newjobs').innerText=min4 + '+';
+			min4++;
+		
+		}
+
+	}
+				function funNewFreelancers()
+	{
+		if(min5<=max5)
+		{
+			document.getElementById('newfreelancers').innerText=min5 + '+';
+			min5++;
+		
+		}
+
+	}
+				function funNewClients()
+	{
+		if(min6<=max6)
+		{
+			document.getElementById('newclients').innerText=min6 + '+';
+			min6++;
+		
+		}
+
+	}
+</script>

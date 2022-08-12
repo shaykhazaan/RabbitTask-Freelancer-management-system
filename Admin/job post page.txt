@@ -1,0 +1,125 @@
+
+Job Post Page
+
+
+
+
+<?php
+	require_once('../admin/connectivity.php');
+	require_once('../admin/validation.php');
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>	</title>
+	<link rel="stylesheet" type="text/css" href="../links/bootstrap/css/bootstrap.css">
+</head>
+<body>
+	<?php 
+
+require_once('header.php');
+require_once('menu.php');
+	 ?>
+	<div id="rest_section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6" style="">
+					<form method="post" enctype="multipart/form-data" style="background-color:#204353;opacity:.8;padding: 30px;" >
+
+						<h3 style="text-align: center;color:white;">Post A Job</h3>
+				
+<!-- <label>Project Name/Title</label> -->
+						<input id="inputTextBox" type="text" name="pname" placeholder="Project Name" class="form-control inputs"><br>
+						
+<!-- <label>Project Category</label> -->
+
+						<input name="pcategory" placeholder="Project Category" value="Software Devlopment" class="form-control inputs"><br>
+			
+
+						<input id="Number" type="text" name="duration" placeholder="Duration In Months e.g 1,2" class="form-control inputs"><br>
+						<input type="text" name="budget" placeholder="Budget" class="form-control inputs"><br>
+
+						
+								<select name="sub_category" placeholder="Sub Category" class="form-control inputs">
+							
+					<option>--Select Sub Category--</option>
+					<option>Android Development</option>
+					<option>Desktop Software Development</option>
+					<option>Game Development</option>
+					<option>Web & Mobile Design</option>
+					<option>Web Development</option>
+					<option>Ecommerce Development</option>
+					<option>Mobile App Development</option>
+			
+
+
+						
+						</select><br>
+
+						
+
+						
+						<textarea rows="5" name="details" placeholder="Project Details" class="form-control inputs"></textarea><br>
+
+					<!-- <input type="file" multiple name="file" class="form-control inputs"><br> -->
+						<input type="submit" name="btn" value="Post A JOb" class="form-control btn btn-success">
+				
+					</form>
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
+<style type="text/css">
+	
+	#rest_section
+	{
+		margin-top:70px;
+		margin-left: 200px;
+		font-size: 25px;
+		background-image: url("../images/bg.jpg");
+		background-size: 100%;
+	
+		z-index: 1;
+
+	}
+	.inputs
+	{
+		opacity: 1;
+		background-color: white;
+	}
+</style>
+<?php
+if(isset($_POST['btn']))
+{
+// $source=$_FILES['file']['tmp_name'];
+// $ex=pathinfo($source,PATHINFO_EXTENSION);
+// $destination='../images'.rand().$_FILES['file']['name'];
+// move_uploaded_file($source, $destination);
+$result=mysqli_query($con,"insert into job_post (project_name,project_category,client_id,duration,budget,details,project_subcategory) values ('".$_POST['pname']."','".$_POST['pcategory']."',$_SESSION[clientid],'".$_POST['duration']."','".$_POST['budget']."','".$_POST['details']."','".$_POST['sub_category']."')");
+ 
+
+ if($result==0)
+				  {
+
+				  	echo "<script>alert('Oops! Something Went Wrong.');</script>";
+				  }
+				  else
+				  {
+				  	header('location:my_job_posts.php');
+				  }
+
+					
+
+
+}
+
+
+?>
